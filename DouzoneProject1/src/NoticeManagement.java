@@ -1,5 +1,8 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class NoticeManagement {
+	Map<Integer, Notice> noticeList = new HashMap<Integer, Notice>();
 	
 	// 공고 상태 변경
 	private void noticeStatusChange() {
@@ -18,7 +21,8 @@ public class NoticeManagement {
 	
 	// 공고 등록
 	private void noticeRegistration() {
-		
+		Notice notice = new Notice();
+		this.noticeList.put(notice.getNoticeNumber(), notice);
 	}
 	
 	// 공고 목록 확인
