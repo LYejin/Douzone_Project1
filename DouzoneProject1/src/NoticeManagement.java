@@ -51,7 +51,7 @@ public class NoticeManagement {
 	}
 	
 	// 공고 지원
-	private void noticeApplication() { // 여기 파라미터로 지원자 ID가 들어와야 공고 클래스 리스트에 저장할 수 있을듯!
-		
+	private void noticeApplication(String memberId) { // 1. 여기 파라미터로 지원자 ID가 들어와야 공고 클래스 리스트에 저장할 수 있을듯!
+													  // 2. 여기도 마찬가지로 사장ID, 회원ID, 지원자ID의 명확한 구분이 필요해보임!
 	}
 }
