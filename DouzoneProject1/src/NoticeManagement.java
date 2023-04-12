@@ -35,7 +35,7 @@ public class NoticeManagement {
 	// 공고 등록
 	private void noticeRegistration() {
 		Notice notice = new Notice();
-		this.noticeList.put(notice.getNoticeNumber(), notice);
+		this.noticeList.put(notice.getNoticeNumber(), notice); // 공고번호 관리 어떻게 해야할지 의논 필요 -> 우리가 입력하는 것보단 알아서 카운팅 되는게 좋아보임
 	}
 	
 	// 공고 목록 확인
