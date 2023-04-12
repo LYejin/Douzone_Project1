@@ -1,7 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class NoticeManagement {
+	Scanner sc = new Scanner(System.in);
 	Map<Integer, Notice> noticeList = new HashMap<Integer, Notice>();
 	
 	// 공고 상태 변경
@@ -16,8 +18,18 @@ public class NoticeManagement {
 	}
 	
 	// 공고 수정
-	private void noticeModification() {
-		
+	private void noticeModification(int noticeNumber) {
+		Notice notice = noticeList.get(noticeNumber);		
+		// -> 어떤 정보를 수정할지 생각해볼 필요가 있을듯!		
+		notice.setRecruitmentNumber(Integer.parseInt(sc.nextLine())); // 모집인원		
+		notice.setGender(sc.nextLine()); // 성별		
+		notice.setCompanyName(sc.nextLine()); // 업체명		
+		notice.setCompanyLocation(sc.nextLine()); // 매장위치		
+		notice.setHourlyWage(Integer.parseInt(sc.nextLine())); // 시급		
+		notice.setJobHours(Integer.parseInt(sc.nextLine())); // 알바시간		
+		notice.setNoticeStatus(); // 공고상태		
+		notice.setPeriod(Integer.parseInt(sc.nextLine())); // 기간		
+		notice.setActualAmountReceived(notice.getHourlyWage()*(notice.getJobHours()*4) - (int)(notice.getHourlyWage()*(notice.getJobHours()*4)*0.033)); // 실수령액 -> 시급, 알바시간 변화에 맞춰 리로드
 	}
 	
 	// 공고 등록
