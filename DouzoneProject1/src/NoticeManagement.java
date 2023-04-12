@@ -7,7 +7,7 @@ public class NoticeManagement {
 	// 공고 상태 변경
 	private void noticeStatusChange(int noticeNumber) {
 		Notice notice = noticeList.get(noticeList);
-//		notice.setNoticeStatus();
+		notice.setNoticeStatus();
 	}
 	
 	// 공고 삭제
