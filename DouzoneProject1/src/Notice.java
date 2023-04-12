@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Notice {
 	private int noticeNumber;
@@ -11,12 +13,12 @@ public class Notice {
 	private boolean noticeStatus;
 	private int period;
 	private int actualAmountReceived;
-//	private List<> : 지원자 리스트 올 예정
+	private List<String> applicant;
 	
 	public Notice() {} // 기본 생성자 -> 초기 공고 등록 에러 방지, 추후 삭제해도 무방
 	public Notice(int noticeNumber, String presidentID, int recruitmentNumber, String gender, String companyName,
 			String companyLocation, int hourlyWage, int jobHours, boolean noticeStatus, int period,
-			int actualAmountReceived) {
+			int actualAmountReceived, List<String> applicant) {
 		super();
 		this.noticeNumber = noticeNumber;
 		this.presidentID = presidentID;
@@ -29,6 +31,7 @@ public class Notice {
 		this.noticeStatus = noticeStatus;
 		this.period = period;
 		this.actualAmountReceived = hourlyWage*(jobHours*4) - (int)(hourlyWage*(jobHours*4)*0.033); // 실수령액 -> 시급*(알바시간(주)*4) - 공제(3.3%)
+		this.applicant = new ArrayList<String>();
 	}
 
 	public int getNoticeNumber() {
@@ -117,5 +120,13 @@ public class Notice {
 
 	public void setActualAmountReceived(int actualAmountReceived) {
 		this.actualAmountReceived = actualAmountReceived;
+	}
+	
+	public List<String> getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(String memberId) {
+		this.applicant.add(memberId);
 	}
 }

@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 public class NoticeManagement {
 	Scanner sc = new Scanner(System.in);
@@ -35,16 +37,25 @@ public class NoticeManagement {
 	// 공고 등록
 	private void noticeRegistration() {
 		Notice notice = new Notice();
-		this.noticeList.put(notice.getNoticeNumber(), notice);
+		this.noticeList.put(notice.getNoticeNumber(), notice); // 공고번호 관리 어떻게 해야할지 의논 필요 -> 우리가 입력하는 것보단 알아서 카운팅 되는게 좋아보임
 	}
 	
 	// 공고 목록 확인
-	private void noticeListCheck() {
-		
+	private void noticeListCheck(String memberId) { // 사장ID, 회원ID, 지원자ID -> 명확한 정의가 필요해보임!
+		Set set = noticeList.entrySet();
+		for(Entry<Integer, Notice> noticeEntry : noticeList.entrySet()) {
+			if(noticeEntry.getValue().getPresidentID().equals(memberId)) { // 넘어온 아이디가 공고 목록 내 사장 아이디와 일치하면
+				System.out.println(noticeEntry.getValue().getNoticeNumber()); // 해당 공고번호 출력
+			}
+		}
 	}
 	
 	// 공고 지원
-	private void noticeApplication() {
+	private void noticeApplication(String memberId, int noticeNumber) {
+		// 1. 여기 파라미터로 지원자 ID가 들어와야 공고 클래스 리스트에 저장할 수 있을듯!
+		// 2. 여기도 마찬가지로 사장ID, 회원ID, 지원자ID의 명확한 구분이 필요해보임!
 		
+		Notice notice = noticeList.get(noticeNumber);
+		notice.setApplicant(memberId);
 	}
 }
