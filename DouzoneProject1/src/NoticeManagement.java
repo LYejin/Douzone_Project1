@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 public class NoticeManagement {
 	Scanner sc = new Scanner(System.in);
@@ -40,7 +42,12 @@ public class NoticeManagement {
 	
 	// 공고 목록 확인
 	private void noticeListCheck(String memberId) { // 사장ID, 회원ID, 지원자ID -> 명확한 정의가 필요해보임!
-		
+		Set set = noticeList.entrySet();
+		for(Entry<Integer, Notice> noticeEntry : noticeList.entrySet()) {
+			if(noticeEntry.getValue().getPresidentID().equals(memberId)) { // 넘어온 아이디가 공고 목록 내 사장 아이디와 일치하면
+				System.out.println(noticeEntry.getValue().getNoticeNumber()); // 해당 공고번호 출력
+			}
+		}
 	}
 	
 	// 공고 지원
