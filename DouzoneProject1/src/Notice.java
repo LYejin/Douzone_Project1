@@ -99,8 +99,8 @@ public class Notice {
 		return noticeStatus;
 	}
 
-	public void setNoticeStatus(boolean noticeStatus) {
-		this.noticeStatus = noticeStatus;
+	public void setNoticeStatus() {
+		this.noticeStatus = !noticeStatus;
 	}
 
 	public int getPeriod() {
