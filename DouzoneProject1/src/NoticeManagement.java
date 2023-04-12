@@ -5,8 +5,9 @@ public class NoticeManagement {
 	Map<Integer, Notice> noticeList = new HashMap<Integer, Notice>();
 	
 	// 공고 상태 변경
-	private void noticeStatusChange() {
-		
+	private void noticeStatusChange(int noticeNumber) {
+		Notice notice = noticeList.get(noticeList);
+//		notice.setNoticeStatus();
 	}
 	
 	// 공고 삭제
