@@ -11,8 +11,8 @@ public class NoticeManagement {
 	}
 	
 	// 공고 삭제
-	private void noticeDeletion() {
-		
+	private void noticeDeletion(int noticeNumber) {
+		noticeList.remove(noticeList);
 	}
 	
 	// 공고 수정
