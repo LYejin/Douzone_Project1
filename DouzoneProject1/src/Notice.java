@@ -13,6 +13,7 @@ public class Notice {
 	private int actualAmountReceived;
 //	private List<> : 지원자 리스트 올 예정
 	
+	public Notice() {} // 기본 생성자 -> 초기 공고 등록 에러 방지, 추후 삭제해도 무방
 	public Notice(int noticeNumber, String presidentID, int recruitmentNumber, String gender, String companyName,
 			String companyLocation, int hourlyWage, int jobHours, boolean noticeStatus, int period,
 			int actualAmountReceived) {
@@ -98,8 +99,8 @@ public class Notice {
 		return noticeStatus;
 	}
 
-	public void setNoticeStatus(boolean noticeStatus) {
-		this.noticeStatus = noticeStatus;
+	public void setNoticeStatus() {
+		this.noticeStatus = !noticeStatus;
 	}
 
 	public int getPeriod() {
