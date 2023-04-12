@@ -39,7 +39,7 @@ public class NoticeManagement {
 	}
 	
 	// 공고 목록 확인
-	private void noticeListCheck() {
+	private void noticeListCheck(String memberId) { // 사장ID, 회원ID, 지원자ID -> 명확한 정의가 필요해보임!
 		
 	}
 	
