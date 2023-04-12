@@ -51,7 +51,7 @@ public class NoticeManagement {
 	}
 	
 	// 공고 지원
-	private void noticeApplication() {
+	private void noticeApplication() { // 여기 파라미터로 지원자 ID가 들어와야 공고 클래스 리스트에 저장할 수 있을듯!
 		
 	}
 }
