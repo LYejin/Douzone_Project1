@@ -168,7 +168,7 @@ public class MemberManagement {
 					
 		//사장 지원자 판단	
 			System.out.println("원하는 회원의 종류를 선택해주세요");
-			System.out.println("1. 사장 회원   2. 지원자 회원  3.회원종류 안내  0.메인메뉴 이동");
+			System.out.println("1. 사장 회원   2. 지원자 회원   0.메인메뉴 이동");
 
 			int selectNum = Integer.parseInt(sc.nextLine());
 
@@ -229,12 +229,6 @@ public class MemberManagement {
 				showMenu();
 
 				break;
-				
-			case 3:
-				System.out.println("사장회원은 아르바이트를 등록하고 지원자의 지원을 받을 수 있습니다.");
-				System.out.println("지원자 회원은 아르바이트 공고를 확인하고 지원할 수 있습니다.");
-				System.out.println("이전 메뉴로 돌아갑니다.");
-				break;
 
 			case 0:
 				showMenu();
@@ -264,7 +258,10 @@ public class MemberManagement {
                 President p = new President(inputId,inputPwd,presentsList.get(inputId).getuserName());
                 p.setLoginStatus(true); 
                 indentifyingApplicants = false;
-                //사장메뉴이동()
+                
+                PresidentMenu presidentmenu = new PresidentMenu(inputId);
+                presidentmenu.presidentMenu();
+                
             }
         }  //지원자 로그인
         else if(applicantsList.containsKey(inputId)) {
