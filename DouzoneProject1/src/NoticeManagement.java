@@ -86,78 +86,88 @@ public class NoticeManagement {
 	// 공고 수정 -> 입력되지 않을 때 상황 처리해야함 함수에서 처리하면 좋을 듯..?
 	public void noticeModification(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
-		System.out.println("realnoticeList : " + noticeList);
-		System.out.println("noticeNumber : "+ noticeNumber );
-		Notice notice = noticeList.get(noticeNumber);
-		System.out.println("현재 공고 : " + noticeList.get(noticeNumber));
-		int num = -1;
-		while (num != 0) {
-			System.out.println("수정할 항목을 선택해주세요");
-			System.out.println("1:모집인원 2:성별 3:업체명 4:매장위치 5:시급 6:알바시간 7:공고상태 8:기간 9:실수령액 0:메뉴로 돌아가기");
-			num = Integer.parseInt(sc.nextLine());
-			switch (num) {
-			case 1:
-				System.out.println("모집인원을 수정합니다. 모집인원을 다시 설정해주세요.");
-				System.out.print("모집인원 : ");
-				notice.setRecruitmentNumber(Integer.parseInt(sc.nextLine())); // 모집인원
-				System.out.println();
-				break;
-			case 2:
-				System.out.println("성별을 수정합니다. 성별을 다시 설정해주세요.");
-				System.out.print("성별 : ");
-				notice.setGender(sc.nextLine()); // 성별
-				System.out.println();
-				break;
-			case 3:
-				System.out.println("업체명을 수정합니다. 업체명을 다시 설정해주세요.");
-				System.out.print("업체명 : ");
-				notice.setCompanyName(sc.nextLine()); // 업체명
-				System.out.println();
-				break;
-			case 4:
-				System.out.println("매장위치을 수정합니다. 매장위치을 다시 설정해주세요.");
-				System.out.print("매장위치 : ");
-				notice.setCompanyLocation(sc.nextLine()); // 매장위치
-				System.out.println();
-				break;
-			case 5:
-				System.out.println("시급을 수정합니다. 시급을 다시 설정해주세요.");
-				System.out.print("시급 : ");
-				notice.setHourlyWage(Integer.parseInt(sc.nextLine())); // 시급
-				System.out.println();
-				break;
-			case 6:
-				System.out.println("알바시간을 수정합니다. 알바시간을 다시 설정해주세요.");
-				System.out.print("알바시간 : ");
-				notice.setJobHours(Integer.parseInt(sc.nextLine())); // 알바시간
-				System.out.println();
-				break;
-			case 7:
-				System.out.println("공고상태을 수정합니다. 공고상태을 다시 설정해주세요.");
-				System.out.print("공고상태 : ");
-				notice.setNoticeStatus(); // 공고상태
-				System.out.println();
-				break;
-			case 8:
-				System.out.println("기간을 수정합니다. 기간을 다시 설정해주세요.");
-				System.out.print("기간 : ");
-				notice.setPeriod(Integer.parseInt(sc.nextLine())); // 기간
-				System.out.println();
-				break;
-			case 9:
-				System.out.println("시급, 알바시간 변화에 맞춰 실수령액을 변경합니다.");
-				notice.setActualAmountReceived(notice.getHourlyWage() * (notice.getJobHours() * 4)
-						- (int) (notice.getHourlyWage() * (notice.getJobHours() * 4) * 0.033)); // 실수령액 -> 시급, 알바시간 변화에 맞춰 리로드
-				break;
-			case 0:
-				System.out.println("메뉴로 돌아갑니다.");
-				break;
-			default:
-				System.out.println("정확한 항복을 기입해주세요.");
+		if(noticeList.size()==0) {
+			System.out.println("등록된 공고가 없습니다.");
+			return;
+		}else {
+			System.out.println("realnoticeList : " + noticeList);
+			System.out.println("noticeNumber : "+ noticeNumber);		
+			Notice notice = noticeList.get(noticeNumber);
+			if(noticeList.get(noticeNumber)==null) {
+				System.out.println("잘못된 공고 번호이거나 해당 공고가 존재하지 않습니다.");
+				return;
 			}
+			System.out.println("현재 공고 : " + noticeList.get(noticeNumber));
+			int num = -1;
+			while (num != 0) {
+				System.out.println("수정할 항목을 선택해주세요");
+				System.out.println("1:모집인원 2:성별 3:업체명 4:매장위치 5:시급 6:알바시간 7:공고상태 8:기간 9:실수령액 0:메뉴로 돌아가기");
+				
+				num = Integer.parseInt(sc.nextLine());
+				switch (num) {
+				case 1:
+					System.out.println("모집인원을 수정합니다. 모집인원을 다시 설정해주세요.");
+					System.out.print("모집인원 : ");
+					notice.setRecruitmentNumber(Integer.parseInt(sc.nextLine())); // 모집인원
+					System.out.println();
+					break;
+				case 2:
+					System.out.println("성별을 수정합니다. 성별을 다시 설정해주세요.");
+					System.out.print("성별 : ");
+					notice.setGender(sc.nextLine()); // 성별
+					System.out.println();
+					break;
+				case 3:
+					System.out.println("업체명을 수정합니다. 업체명을 다시 설정해주세요.");
+					System.out.print("업체명 : ");
+					notice.setCompanyName(sc.nextLine()); // 업체명
+					System.out.println();
+					break;
+				case 4:
+					System.out.println("매장위치을 수정합니다. 매장위치을 다시 설정해주세요.");
+					System.out.print("매장위치 : ");
+					notice.setCompanyLocation(sc.nextLine()); // 매장위치
+					System.out.println();
+					break;
+				case 5:
+					System.out.println("시급을 수정합니다. 시급을 다시 설정해주세요.");
+					System.out.print("시급 : ");
+					notice.setHourlyWage(Integer.parseInt(sc.nextLine())); // 시급
+					System.out.println();
+					break;
+				case 6:
+					System.out.println("알바시간을 수정합니다. 알바시간을 다시 설정해주세요.");
+					System.out.print("알바시간 : ");
+					notice.setJobHours(Integer.parseInt(sc.nextLine())); // 알바시간
+					System.out.println();
+					break;
+				case 7:
+					System.out.println("공고상태을 수정합니다. 공고상태을 다시 설정해주세요.");
+					System.out.print("공고상태 : ");
+					notice.setNoticeStatus(); // 공고상태
+					System.out.println();
+					break;
+				case 8:
+					System.out.println("기간을 수정합니다. 기간을 다시 설정해주세요.");
+					System.out.print("기간 : ");
+					notice.setPeriod(Integer.parseInt(sc.nextLine())); // 기간
+					System.out.println();
+					break;
+				case 9:
+					System.out.println("시급, 알바시간 변화에 맞춰 실수령액을 변경합니다.");
+					notice.setActualAmountReceived(notice.getHourlyWage() * (notice.getJobHours() * 4)
+							- (int) (notice.getHourlyWage() * (notice.getJobHours() * 4) * 0.033)); // 실수령액 -> 시급, 알바시간 변화에 맞춰 리로드
+					break;
+				case 0:
+					System.out.println("메뉴로 돌아갑니다.");
+					break;
+				default:
+					System.out.println("정확한 항복을 기입해주세요.");
+				}			
+			}
+			noticeFileSave(noticeList);
+			System.out.println();			
 		}
-		noticeFileSave(noticeList);
-		System.out.println();
 	}
 
 	// 공고 등록
@@ -194,7 +204,7 @@ public class NoticeManagement {
 		if (noticeList.size() == 0) {
 			System.out.println("등록된 공고가 없습니다.");
 		} else {
-			System.out.print("등록한 공고 정보 : ");
+			System.out.println("등록한 공고 정보 : ");
 			for (Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
 				if (noticeEntry.getValue().getPresidentID().equals(presidentID)) {
 					System.out.println(noticeEntry.getValue());
