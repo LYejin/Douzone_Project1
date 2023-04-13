@@ -42,8 +42,9 @@ public class PresidentMenu {
 	}
 
 	// 개인정보수정 -> text로 read해서 그 값을 받아와서 수정 후 다시 text 파일로 저장
-	private void personalInfomationModifocation(String presidentID) {
-
+	private void personalInfomationModifocation() {
+		MemberManagement memberManagement = new MemberManagement();
+		memberManagement.presidentInfomationModifocation(presidentID);
 	}
 
 	// 로그아웃 -> text로 read해서 그 값을 받아와서 로그아웃 후 다시 text 파일로 저장
@@ -58,7 +59,7 @@ public class PresidentMenu {
 		int noticeNumber = Integer.parseInt(sc.nextLine());
 		return noticeNumber;
 	}
-
+	
 	public void presidentMenu() {
 		int temp = -1;
 		while (temp != 8) {
@@ -88,7 +89,7 @@ public class PresidentMenu {
 				noticeStatusChange(inputNoticeNumber());
 				break;
 			case 7:
-				
+				personalInfomationModifocation();
 				break;
 			case 8:
 				
