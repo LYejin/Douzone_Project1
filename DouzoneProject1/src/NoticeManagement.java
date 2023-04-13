@@ -210,10 +210,33 @@ public class NoticeManagement {
 		System.out.print("지원할 공고 번호를 입력해주세요 : ");
 		String number = sc.nextLine();
 		this.noticeList = noticeFileLoad();
-		Notice notice = noticeList.get(number);
-		notice.setApplicant(applicantId);
-		noticeFileSave(noticeList);
-		System.out.println();
+		if(inEntry(applicantId) && isRecruitment(number)) {
+			Notice notice = noticeList.get(number);
+			notice.setApplicant(applicantId);
+			noticeFileSave(noticeList);
+			System.out.println();			
+		}else {
+			System.out.println("이미 신청하신 공고이거나 모집이 마감된 공고입니다.");
+		}
+	}
+	
+	// 해당 공고가 모집 중인가??
+	public boolean isRecruitment(String number) {
+		if(noticeList.get(number).getNoticeStatus().equals("모집중")) return true;
+		else return false;
+	}
+	
+	// 해당 공고 안에 이미 지원자가 있는가??
+	public boolean inEntry(String applicantId) {
+		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
+			if(noticeEntry.getValue().getApplicant()==null) continue;
+			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) {
+				if(noticeEntry.getValue().getApplicant().get(i).equals(applicantId)) {
+					return false;
+				}
+			}		
+		}
+		return true;
 	}
 	
 	// 전체 공고 목록 확인
@@ -239,6 +262,7 @@ public class NoticeManagement {
 		System.out.println("지원한 공고의 목록을 확인합니다.");
 		this.noticeList = noticeFileLoad();
 		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
+			if(noticeEntry.getValue().getApplicant()==null) continue;
 			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) { // 공고마다 지원자 수만큼
 				if((noticeEntry.getValue().getApplicant().get(i).equals(applicantId))) {
 					System.out.println(noticeEntry.getValue().getNoticeNumber() + " ");
