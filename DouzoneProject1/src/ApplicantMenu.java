@@ -12,7 +12,7 @@ public class ApplicantMenu {
 		this.noticeManagement = new NoticeManagement();
 	}
 
-	public ApplicantMenu(Applicant applicant) {
+	public void applicantMenu() {
 		int temp = -1;
 		while (temp != 8) {
 			System.out.println("----------------------------------");
@@ -46,12 +46,12 @@ public class ApplicantMenu {
 	}
 	
 	// 공고번호 입력 받는 메소드
-		private String inputNoticeNumber() { 
-			System.out.println("공고번호를 입력해주세요.");
-			System.out.println("공고번호 : ");
-			String noticeNumber = sc.nextLine();
-			return noticeNumber;
-		}
+	private String inputNoticeNumber() { 
+		System.out.println("공고번호를 입력해주세요.");
+		System.out.println("공고번호 : ");
+		String noticeNumber = sc.nextLine();
+		return noticeNumber;
+	}
 	
 	public void noticeApplication(String noticeNumber) { // 공고지원 
 		noticeManagement.noticeApplication(noticeNumber);
@@ -70,9 +70,10 @@ public class ApplicantMenu {
 	}
 	
 	public void applicantInfomationModifocation(String applicantId) { // 개인정보 수정 
-		
+		MemberManagement memberManagement = new MemberManagement();
+		memberManagement.applicantInfomationModifocation(applicantId);
 	}
-	
+
 	public void logOut(String applicantId) {
 		//indentifyingApplicants = false;
 	}
