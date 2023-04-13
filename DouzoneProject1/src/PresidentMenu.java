@@ -60,6 +60,7 @@ public class PresidentMenu {
 		return noticeNumber;
 	}
 	
+	// 사장 메뉴
 	public void presidentMenu() {
 		int temp = -1;
 		while (temp != 8) {
@@ -91,14 +92,12 @@ public class PresidentMenu {
 			case 7:
 				personalInfomationModifocation();
 				break;
-			case 8:
-				
+			case 8:				
 				break;
 			default:
 				System.out.println("정확한 항목 번호를 입력해주세요.");
 			}
-		}
-		
+		}		
 	}
 
 }
