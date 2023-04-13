@@ -114,7 +114,51 @@ public class MemberManagement {
 		}
 	}
 	
-	public void applicatnFileSave() {
+	// 지원자 개인정보 변경
+	public void applicantInfomationModifocation(String applicantId) {
+		HashMap<String, Applicant> applicantsList = applicantsSetting();
+		Applicant applicant = applicantsList.get(applicantId);
+		int num = -1;
+		while (num != 0) {
+			System.out.println("개인정보를 수정할 항목을 선택해주세요");
+			System.out.println("1:비밀번호 2:이름");
+			num = Integer.parseInt(sc.nextLine());
+			switch (num) {
+			case 1:
+				System.out.println("비밀번호는 영문자를 포함한 숫자의 조합으로 8~12자리로 입력해주세요");
+				System.out.println("메뉴로 이동을 원하시면 '메뉴'를 입력해주세요");
+				System.out.printf("비밀번호 : ");
+				String memberPW = sc.nextLine();
+				boolean check;
+				if (memberPW.equals("메뉴")) {
+					showMenu();
+					break;
+				} else {
+					check = Pattern.matches("^[a-zA-Z0-9]{7,12}([a-zA-Z]+)", memberPW);
+				}
+				applicant.setmemberPW(memberPW);
+				break;
+			case 2:
+				System.out.println("사용자의 이름을 정확히 입력해주세요");
+				System.out.println("메뉴로 이동을 원하시면 '메뉴'를 입력해주세요");
+				System.out.printf("사용자 이름 : ");
+				String userName = sc.nextLine();
+
+				if (userName.equals("메뉴")) {
+					showMenu();
+					break;
+				} else {
+					check = Pattern.matches("^[가-힣]{2,6}$", userName);
+				}
+				applicant.setuserName(userName);
+				break;
+			}
+			applicantFileSave();
+			System.out.println();
+		}
+	}
+	
+	public void applicantFileSave() {
 		String applicantFile = "ApplicantData.txt";
 		FileOutputStream fos = null;
 		BufferedOutputStream bos = null;
@@ -140,7 +184,7 @@ public class MemberManagement {
 		}
 	}
 	
-	public void applicantsSetting() {
+	public HashMap<String,Applicant> applicantsSetting() {
 
 		File applicantFile = new File("ApplicantData.txt");// null 일 때 예외발생
 		if (applicantFile.length() > 0) {
@@ -159,6 +203,7 @@ public class MemberManagement {
 				System.out.println("유저정보를 불러오는데 실패했습니다.");
 			}
 		}
+		return applicantsList;
 	}
 
 	// 회원가입과 로그인을 선택하는 메뉴화면 출력
@@ -202,11 +247,6 @@ public class MemberManagement {
 
 	// 회원가입
 	public void signUp() {
-
-		FileOutputStream fos = null;
-		BufferedOutputStream bos = null;
-		ObjectOutputStream out = null;
-
 		Scanner sc = new Scanner(System.in);
 
 		boolean check;
@@ -281,7 +321,7 @@ public class MemberManagement {
 		case 2:
 
 			applicantsList.put(memberID, new Applicant(memberID, memberPW, userName));
-			applicatnFileSave();
+			applicantFileSave();
 
 			System.out.println("축하합니다 회원가입이 완료되었습니다.");
 			showMenu();
@@ -327,8 +367,11 @@ public class MemberManagement {
 
 				indentifyingApplicants = true;
 
-				President p = new President(inputId, inputPwd, presentsList.get(inputId).getuserName());
+				President p = new President(inputId, inputPwd, applicantsList.get(inputId).getuserName());
 				p.setLoginStatus(true);
+				
+				ApplicantMenu applicantmenu = new ApplicantMenu(inputId);
+				applicantmenu.applicantMenu();
 			}
 		} else {
 			System.out.println("존재하지 않는 아이디 입니다.");
