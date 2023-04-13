@@ -182,13 +182,8 @@ public class NoticeManagement {
 		System.out.println("기간 : ");
 		int period = Integer.parseInt(sc.nextLine());
 		Notice notice = new Notice(presidentID, recruitmentNumber, gender, companyName, companyLocation, hourlyWage, jobHours, period);
-		System.out.println(notice.getNoticeNumber());
-		System.out.println("1" + noticeList);
 		this.noticeList.put(notice.getNoticeNumber(), notice);
-		System.out.println("2" + noticeList);
 		noticeFileSave(noticeList);
-		
-		System.out.println("3" + noticeList);
 		System.out.println("공고가 등록되었습니다.");
 		System.out.println();
 	}
@@ -212,10 +207,11 @@ public class NoticeManagement {
 	
 	////////////////////////지원자 메소드 
 	// 공고 지원
-	public void noticeApplication(String applicantId, int noticeNumber) {
+	public void noticeApplication(String applicantId) {
 		System.out.print("지원할 공고 번호를 입력해주세요 : ");
+		int number = Integer.parseInt(sc.nextLine());
 		this.noticeList = noticeFileLoad();
-		Notice notice = noticeList.get(noticeNumber);
+		Notice notice = noticeList.get(number);
 		notice.setApplicant(applicantId);
 		noticeFileSave(noticeList);
 		System.out.println();
