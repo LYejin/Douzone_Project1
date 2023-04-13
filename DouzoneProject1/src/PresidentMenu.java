@@ -12,22 +12,22 @@ public class PresidentMenu {
 	}
 
 	// 지원자조회
-	private void applicantInquiry(int noticeNumber) {
+	private void applicantInquiry(String noticeNumber) {
 		noticeManagement.applicantInquiry(noticeNumber);
 	}
 
 	// 공고상태변경
-	private void noticeStatusChange(int noticeNumber) {
+	private void noticeStatusChange(String noticeNumber) {
 		noticeManagement.noticeStatusChange(noticeNumber);
 	}
 
 	// 공고삭제
-	private void noticeDeletion(int noticeNumber) {
+	private void noticeDeletion(String noticeNumber) {
 		noticeManagement.noticeDeletion(noticeNumber);
 	}
 
 	// 공고수정
-	private void noticeModification(int noticeNumber) {
+	private void noticeModification(String noticeNumber) {
 		noticeManagement.noticeModification(noticeNumber);
 	}
 
@@ -42,21 +42,26 @@ public class PresidentMenu {
 	}
 
 	// 개인정보수정 -> text로 read해서 그 값을 받아와서 수정 후 다시 text 파일로 저장
+<<<<<<< HEAD
 	private void personalInfomationModifocation() {
 		MemberManagement memberManagement = new MemberManagement();
 		memberManagement.presidentInfomationModifocation(presidentID);
+=======
+	private void personalInfomationModifocation(String presidentID) {
+		
+>>>>>>> 583529c28b3fff6d63a86b3b7a8545819722a671
 	}
 
 	// 로그아웃 -> text로 read해서 그 값을 받아와서 로그아웃 후 다시 text 파일로 저장
 	private void logOut(int presidenID) {
-
+		
 	}
 	
 	// 공고번호 입력 받는 메소드
-	private int inputNoticeNumber() {
+	private String inputNoticeNumber() {
 		System.out.println("공고번호를 입력해주세요.");
 		System.out.println("공고번호 : ");
-		int noticeNumber = Integer.parseInt(sc.nextLine());
+		String noticeNumber = sc.nextLine();
 		return noticeNumber;
 	}
 	

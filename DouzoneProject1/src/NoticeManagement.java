@@ -20,9 +20,9 @@ public class NoticeManagement {
 			try {
 				FileInputStream fis = new FileInputStream(file);
 				ObjectInputStream oos = new ObjectInputStream(fis);
-
+				
 				noticeList = (HashMap) oos.readObject();
-
+				
 				oos.close();
 				fis.close();
 			} catch (Exception e) {
@@ -38,24 +38,22 @@ public class NoticeManagement {
 	// 수정된 파일 저장하기 (추가 -> 클래스 다이어그램 수정)
 	public void noticeFileSave(Map<String, Notice> notice) {
 		File file = new File("noticeFile.txt");
-		if (file.length() > 0) {
-			try {
-				FileOutputStream fos = new FileOutputStream(file);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
+		try {
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-				oos.writeObject(notice);
-				
-				oos.close();
-				fos.close();
-			} catch (Exception e) {
-				System.out.println("수정된 파일 저장 과정에서 에러발생");
-				e.printStackTrace();
-			}
+			oos.writeObject(noticeList);
+			
+			oos.close();
+			fos.close();
+		} catch (Exception e) {
+			System.out.println("수정된 파일 저장 과정에서 에러발생");
+			e.printStackTrace();
 		}
 	}
 
 	// 지원자 조회
-	public void applicantInquiry(int noticeNumber) {
+	public void applicantInquiry(String noticeNumber) {
 		System.out.println("지원자를 조회합니다.");
 		Notice notice = noticeFileLoad().get(noticeNumber);
 		if (notice.getApplicant() == null ) {
@@ -71,7 +69,7 @@ public class NoticeManagement {
 	}
 
 	// 공고 상태 변경
-	public void noticeStatusChange(int noticeNumber) {
+	public void noticeStatusChange(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
 		Notice notice = noticeList.get(noticeNumber);
 		notice.setNoticeStatus();
@@ -79,7 +77,7 @@ public class NoticeManagement {
 	}
 
 	// 공고 삭제
-	public void noticeDeletion(int noticeNumber) {
+	public void noticeDeletion(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
 		noticeList.remove(noticeNumber);
 		noticeFileSave(noticeList);
@@ -87,16 +85,16 @@ public class NoticeManagement {
 	}
 
 	// 공고 수정 -> 입력되지 않을 때 상황 처리해야함 함수에서 처리하면 좋을 듯..?
-	public void noticeModification(int noticeNumber) {
+	public void noticeModification(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
 		System.out.println("realnoticeList : " + noticeList);
 		System.out.println("noticeNumber : "+ noticeNumber );
 		Notice notice = noticeList.get(noticeNumber);
 		System.out.println("현재 공고 : " + noticeList.get(noticeNumber));
-		System.out.println("수정할 항목을 선택해주세요");
-		System.out.println("1:모집인원 2:성별 3:업체명 4:매장위치 5:시급 6:알바시간 7:공고상태 8:기간 9:실수령액 0:메뉴로 돌아가기");
 		int num = -1;
 		while (num != 0) {
+			System.out.println("수정할 항목을 선택해주세요");
+			System.out.println("1:모집인원 2:성별 3:업체명 4:매장위치 5:시급 6:알바시간 7:공고상태 8:기간 9:실수령액 0:메뉴로 돌아가기");
 			num = Integer.parseInt(sc.nextLine());
 			switch (num) {
 			case 1:
@@ -234,7 +232,7 @@ public class NoticeManagement {
 	}
 	
 	// [지원자] 각 공고 정보 확인 (하나씩)
-	public void noticeInfoCheck(int noticeNumber) {
+	public void noticeInfoCheck(String noticeNumber) {
 		System.out.println("해당 공고의 정보를 확인합니다.");
 		this.noticeList = noticeFileLoad();
 		System.out.println(noticeList.get(noticeNumber));

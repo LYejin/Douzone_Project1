@@ -107,11 +107,11 @@ public class Notice implements Serializable {
 
 	public void setNoticeStatus() { 
 		System.out.println("공고상태를 변경합니다.");
-		if (getNoticeStatus() == "모집중") {
+		if (getNoticeStatus().equals("모집중")) {
 			System.out.println("현재 공고상태는 '모집중' 입니다.");
 			System.out.println("현재 공고상태를 '모집완료'로 변경합니다.");
 			this.noticeStatus = "모집완료";
-		} else if (getNoticeStatus() == "모집완료") {
+		} else if (getNoticeStatus().equals("모집완료")) {
 			System.out.println("현재 공고상태는 '모집완료' 입니다.");
 			System.out.println("현재 공고상태를 '모집중'로 변경합니다.");
 			this.noticeStatus = "모집중";
