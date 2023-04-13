@@ -16,38 +16,44 @@ public class NoticeManagement {
 	// 파일에서 값 불러오기 (추가 -> 클래스 다이어그램 수정)
 	public Map<Integer, Notice> noticeFileLoad() {
 		File file = new File("noticeFile.txt");
-		try {
-			FileInputStream fis = new FileInputStream(file);
-			ObjectInputStream oos = new ObjectInputStream(fis);
+		if (file.length() > 0) {
+			try {
+				FileInputStream fis = new FileInputStream(file);
+				ObjectInputStream oos = new ObjectInputStream(fis);
 
-			noticeList = (HashMap) oos.readObject();
+				noticeList = (HashMap) oos.readObject();
 
-			oos.close();
-			fis.close();
+				oos.close();
+				fis.close();
 
-		} catch (Exception e) {
-			System.out.println("공고 파일을 불러오는데 실패하였습니다.");
-			e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("공고 파일을 불러오는데 실패하였습니다.");
+				e.printStackTrace();
+			}
+			return noticeList;
 		}
-		return noticeList;
+		return null;
 	}
 
 	// 수정된 파일 저장하기 (추가 -> 클래스 다이어그램 수정)
 	public Map<Integer, Notice> noticeFileSave(Map<Integer, Notice> notice) {
 		File file = new File("noticeFile.txt");
-		try {
-			FileOutputStream fos = new FileOutputStream(file);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
+		if (file.length() > 0) {
+			try {
+				FileOutputStream fos = new FileOutputStream(file);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-			oos.writeObject(noticeList);
-
-			oos.close();
-			fos.close();
-		} catch (Exception e) {
-			System.out.println("수정된 파일 저장 과정에서 에러발생");
-			e.printStackTrace();
+				oos.writeObject(noticeList);
+				
+				oos.close();
+				fos.close();
+			} catch (Exception e) {
+				System.out.println("수정된 파일 저장 과정에서 에러발생");
+				e.printStackTrace();
+			}
+			return notice;
 		}
-		return notice;
+		return null;
 	}
 
 	// 지원자 조회
@@ -168,9 +174,8 @@ public class NoticeManagement {
 		int jobHours = Integer.parseInt(sc.nextLine()); 
 		System.out.println("기간 : ");
 		int period = Integer.parseInt(sc.nextLine());
-		this.noticeList = noticeFileLoad();
-		Notice notice = new Notice();
-		this.noticeList.put(notice.getNoticeNumber(), new Notice(presidentID, recruitmentNumber, gender, companyName, companyLocation, hourlyWage, jobHours, period));
+		Notice notice = new Notice(presidentID, recruitmentNumber, gender, companyName, companyLocation, hourlyWage, jobHours, period);
+		this.noticeList.put(notice.getNoticeNumber(), notice);
 		noticeFileSave(noticeList);
 		System.out.println("공고가 등록되었습니다.");
 		System.out.println();
@@ -179,11 +184,15 @@ public class NoticeManagement {
 	// [사장] 등록한 공고 목록 확인
 	public void noticeListCheck(String presidentID) {
 		System.out.println("등록한 공고를 확인합니다.");
-		System.out.print("등록한 공고 정보 : ");
 		this.noticeList = noticeFileLoad();
-		for (Entry<Integer, Notice> noticeEntry : noticeList.entrySet()) {
-			if (noticeEntry.getValue().getPresidentID().equals(presidentID)) {
-				System.out.println(noticeEntry.getValue());
+		if (noticeList.size() == 0) {
+			System.out.println("등록된 공고가 없습니다.");
+		} else {
+			System.out.print("등록한 공고 정보 : ");
+			for (Entry<Integer, Notice> noticeEntry : noticeList.entrySet()) {
+				if (noticeEntry.getValue().getPresidentID().equals(presidentID)) {
+					System.out.println(noticeEntry.getValue());
+				}
 			}
 		}
 		System.out.println();

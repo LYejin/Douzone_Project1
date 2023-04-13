@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notice {
+public class Notice implements Serializable {
 	private static int noticeNumber = 1;
 	private String presidentID;
 	private int recruitmentNumber;
