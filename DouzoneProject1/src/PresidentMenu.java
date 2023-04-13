@@ -42,14 +42,9 @@ public class PresidentMenu {
 	}
 
 	// 개인정보수정 -> text로 read해서 그 값을 받아와서 수정 후 다시 text 파일로 저장
-<<<<<<< HEAD
 	private void personalInfomationModifocation() {
 		MemberManagement memberManagement = new MemberManagement();
 		memberManagement.presidentInfomationModifocation(presidentID);
-=======
-	private void personalInfomationModifocation(String presidentID) {
-		
->>>>>>> 583529c28b3fff6d63a86b3b7a8545819722a671
 	}
 
 	// 로그아웃 -> text로 read해서 그 값을 받아와서 로그아웃 후 다시 text 파일로 저장
