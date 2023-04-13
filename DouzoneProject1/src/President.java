@@ -36,8 +36,4 @@ public class President implements Serializable {
 		this.userName = userName;
 	}
 	
-	
-	
-	
-	
 }

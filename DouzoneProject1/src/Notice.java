@@ -1,9 +1,11 @@
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Notice implements Serializable {
-	private static int noticeNumber = 1;
+	private String noticeNumber;
 	private String presidentID;
 	private int recruitmentNumber;
 	private String gender;
@@ -16,11 +18,16 @@ public class Notice implements Serializable {
 	private int actualAmountReceived;
 	private List<String> applicant;
 	
+	Date today = new Date();
+        
+    SimpleDateFormat date = new SimpleDateFormat("yyMMdd");
+    SimpleDateFormat time = new SimpleDateFormat("hhmmss");
+	
 	public Notice() {} // 기본 생성자 -> 초기 공고 등록 에러 방지, 추후 삭제해도 무방
 	public Notice(String presidentID, int recruitmentNumber, String gender, String companyName,
 			String companyLocation, int hourlyWage, int jobHours, int period) {
 		super();
-		this.noticeNumber++;
+		this.noticeNumber = (date.format(today) + time.format(today));
 		this.recruitmentNumber = recruitmentNumber;
 		this.presidentID=presidentID;
 		this.gender = gender;
@@ -34,7 +41,7 @@ public class Notice implements Serializable {
 		this.applicant = new ArrayList<String>();
 	}
 
-	public int getNoticeNumber() {
+	public String getNoticeNumber() {
 		return noticeNumber;
 	}
 
@@ -128,6 +135,9 @@ public class Notice implements Serializable {
 	}
 	
 	public List<String> getApplicant() {
+		if (applicant.size() == 0) {
+			return null;
+		}
 		return applicant;
 	}
 

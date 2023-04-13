@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 public class NoticeManagement {
 	Scanner sc = new Scanner(System.in);
-	Map<Integer, Notice> noticeList = new HashMap<Integer, Notice>();
+	Map<String, Notice> noticeList = new HashMap<String, Notice>();
 
 	// 파일에서 값 불러오기 (추가 -> 클래스 다이어그램 수정)
-	public Map<Integer, Notice> noticeFileLoad() {
+	public Map<String, Notice> noticeFileLoad() {
 		File file = new File("noticeFile.txt");
 		if (file.length() > 0) {
 			try {
@@ -25,25 +25,25 @@ public class NoticeManagement {
 
 				oos.close();
 				fis.close();
-
 			} catch (Exception e) {
 				System.out.println("공고 파일을 불러오는데 실패하였습니다.");
 				e.printStackTrace();
 			}
 			return noticeList;
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	// 수정된 파일 저장하기 (추가 -> 클래스 다이어그램 수정)
-	public Map<Integer, Notice> noticeFileSave(Map<Integer, Notice> notice) {
+	public void noticeFileSave(Map<String, Notice> notice) {
 		File file = new File("noticeFile.txt");
 		if (file.length() > 0) {
 			try {
 				FileOutputStream fos = new FileOutputStream(file);
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-				oos.writeObject(noticeList);
+				oos.writeObject(notice);
 				
 				oos.close();
 				fos.close();
@@ -51,19 +51,22 @@ public class NoticeManagement {
 				System.out.println("수정된 파일 저장 과정에서 에러발생");
 				e.printStackTrace();
 			}
-			return notice;
 		}
-		return null;
 	}
 
 	// 지원자 조회
 	public void applicantInquiry(int noticeNumber) {
 		System.out.println("지원자를 조회합니다.");
 		Notice notice = noticeFileLoad().get(noticeNumber);
-		System.out.print("해당 공고 지원자 : ");
-		for (String applicant : notice.getApplicant()) { // 지원자 출력
-			System.out.println(applicant + " ");
+		if (notice.getApplicant() == null ) {
+			System.out.println("공고 지원자가 없습니다.");
+		} else {
+			System.out.print("해당 공고 지원자 : ");
+			for (String applicant : notice.getApplicant()) { // 지원자 출력
+				System.out.println(applicant + " ");
+			}
 		}
+		
 		System.out.println();
 	}
 
@@ -86,7 +89,10 @@ public class NoticeManagement {
 	// 공고 수정 -> 입력되지 않을 때 상황 처리해야함 함수에서 처리하면 좋을 듯..?
 	public void noticeModification(int noticeNumber) {
 		this.noticeList = noticeFileLoad();
+		System.out.println("realnoticeList : " + noticeList);
+		System.out.println("noticeNumber : "+ noticeNumber );
 		Notice notice = noticeList.get(noticeNumber);
+		System.out.println("현재 공고 : " + noticeList.get(noticeNumber));
 		System.out.println("수정할 항목을 선택해주세요");
 		System.out.println("1:모집인원 2:성별 3:업체명 4:매장위치 5:시급 6:알바시간 7:공고상태 8:기간 9:실수령액 0:메뉴로 돌아가기");
 		int num = -1;
@@ -159,6 +165,9 @@ public class NoticeManagement {
 
 	// 공고 등록
 	public void noticeRegistration(String presidentID) {
+		if ( noticeList.size() > 0) {
+			this.noticeList = noticeFileLoad();
+		}
 		System.out.println("아래의 정보를 입력해주세요.");
 		System.out.println("모집인원 : ");
 		int recruitmentNumber = Integer.parseInt(sc.nextLine());
@@ -175,8 +184,13 @@ public class NoticeManagement {
 		System.out.println("기간 : ");
 		int period = Integer.parseInt(sc.nextLine());
 		Notice notice = new Notice(presidentID, recruitmentNumber, gender, companyName, companyLocation, hourlyWage, jobHours, period);
+		System.out.println(notice.getNoticeNumber());
+		System.out.println("1" + noticeList);
 		this.noticeList.put(notice.getNoticeNumber(), notice);
+		System.out.println("2" + noticeList);
 		noticeFileSave(noticeList);
+		
+		System.out.println("3" + noticeList);
 		System.out.println("공고가 등록되었습니다.");
 		System.out.println();
 	}
@@ -189,7 +203,7 @@ public class NoticeManagement {
 			System.out.println("등록된 공고가 없습니다.");
 		} else {
 			System.out.print("등록한 공고 정보 : ");
-			for (Entry<Integer, Notice> noticeEntry : noticeList.entrySet()) {
+			for (Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
 				if (noticeEntry.getValue().getPresidentID().equals(presidentID)) {
 					System.out.println(noticeEntry.getValue());
 				}
@@ -213,7 +227,7 @@ public class NoticeManagement {
 	public void allNoticeListCheck() {
 		System.out.println("전체 공고 목록을 확인합니다.");
 		this.noticeList = noticeFileLoad();
-		for (Entry<Integer, Notice> noticeEntry : noticeList.entrySet()) {
+		for (Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
 			System.out.println(noticeEntry.getValue());
 		}
 		System.out.println();
