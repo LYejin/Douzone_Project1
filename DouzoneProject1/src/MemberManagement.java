@@ -200,8 +200,8 @@ public class MemberManagement {
 
 	// 회원가입과 로그인을 선택하는 메뉴화면 출력
 	public void showMenu() {
-		presentsSetting(); // 사장 목록 불러오기 -> 사용되는 곳이 없음!
-		applicantsSetting();// 지원자 목록 불러오기 -> 사용되는 곳이 없음!
+		presentsSetting(); // 사장 목록 불러오기
+		applicantsSetting();// 지원자 목록 불러오기
 
 		while (true) {
 			System.out.println("**********************************");
