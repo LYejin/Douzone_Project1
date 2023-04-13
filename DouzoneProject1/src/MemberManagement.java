@@ -200,8 +200,8 @@ public class MemberManagement {
 
 	// 회원가입과 로그인을 선택하는 메뉴화면 출력
 	public void showMenu() {
-		presentsSetting(); // 사장 목록 불러오기 -> 사용되는 곳이 없음!
-		applicantsSetting();// 지원자 목록 불러오기 -> 사용되는 곳이 없음!
+		presentsSetting(); // 사장 목록 불러오기
+		applicantsSetting();// 지원자 목록 불러오기
 
 		while (true) {
 			System.out.println("**********************************");
@@ -348,4 +348,12 @@ public class MemberManagement {
 			System.out.println("존재하지 않는 아이디 입니다.");
 		}
 	}
+
+	/*
+	public static void main(String[] args) {
+		MemberManagement memberMgnt = new MemberManagement();
+		memberMgnt.showMenu();
+	}
+	 */
+
 }

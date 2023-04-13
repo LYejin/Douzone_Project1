@@ -7,7 +7,7 @@ public class Applicant implements Serializable {
 	private String memberPW;
 	private String userName;
 	private boolean loginStatus;
-	private List<Career> clist = new ArrayList<>(); 
+	public List<Career> clist = new ArrayList<>(); 
 	
 	public Applicant(String memberID, String memberPW, String userName) {
 		super();
