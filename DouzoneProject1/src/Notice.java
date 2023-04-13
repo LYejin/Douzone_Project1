@@ -151,7 +151,5 @@ public class Notice implements Serializable {
 				"\n[공고번호]: " + noticeNumber + "\n[모집인원] : " + recruitmentNumber + "\n[성별]: " + gender + "\n[업체명]: " + companyName
 				+ "\n[매장위치]: " + companyLocation + "\n[시급]: " + hourlyWage + "\n[알바시간]: " + jobHours
 				+ "\n[공고상태]: " + noticeStatus + "\n[기간]: " + period + "\n[실수령액]: " + actualAmountReceived;
-	}
-	
-	
+	}	
 }
