@@ -15,7 +15,7 @@ public class ApplicantMenu {
 	// 지원자 메뉴
 	public void applicantMenu() {
 		int temp = -1;
-		while (temp != 8) {
+		while (temp != 6) {
 			System.out.println("----------------------------------");
 			System.out.println("-             지원자 메뉴           -");
 			System.out.println("----------------------------------");
