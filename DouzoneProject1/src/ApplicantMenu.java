@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class ApplicantMenu {
-	public String applicantId;
+	private String applicantId;
 	private NoticeManagement noticeManagement;
 	
 	Scanner sc = new Scanner(System.in);	
