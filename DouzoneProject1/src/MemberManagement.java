@@ -348,12 +348,4 @@ public class MemberManagement {
 			System.out.println("존재하지 않는 아이디 입니다.");
 		}
 	}
-
-	/*
-	public static void main(String[] args) {
-		MemberManagement memberMgnt = new MemberManagement();
-		memberMgnt.showMenu();
-	}
-	 */
-
 }
