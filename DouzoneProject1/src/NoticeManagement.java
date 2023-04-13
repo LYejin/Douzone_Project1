@@ -10,8 +10,8 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class NoticeManagement {
-	Scanner sc = new Scanner(System.in);
 	Map<String, Notice> noticeList = new HashMap<String, Notice>();
+	Scanner sc = new Scanner(System.in);
 
 	// 파일에서 값 불러오기 (추가 -> 클래스 다이어그램 수정)
 	public Map<String, Notice> noticeFileLoad() {
@@ -63,8 +63,7 @@ public class NoticeManagement {
 			for (String applicant : notice.getApplicant()) { // 지원자 출력
 				System.out.println(applicant + " ");
 			}
-		}
-		
+		}		
 		System.out.println();
 	}
 
