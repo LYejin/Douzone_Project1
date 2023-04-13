@@ -23,7 +23,7 @@ public class ApplicantMenu {
 			temp = Integer.parseInt(sc.nextLine());
 			switch (temp) {
 			case 1:
-				noticeApplication(inputNoticeNumber());
+				noticeApplication(applicantId);
 				break;
 			case 2:
 				noticeInfoCheck(inputNoticeNumber());
@@ -53,8 +53,9 @@ public class ApplicantMenu {
 		return noticeNumber;
 	}
 	
-	public void noticeApplication(String noticeNumber) { // 공고지원 
-		noticeManagement.noticeApplication(noticeNumber);
+	
+	public void noticeApplication(String applicantId) { // 공고지원 
+		noticeManagement.noticeApplication(applicantId);
 	}
 	
 	public void noticeInfoCheck(String noticeNumber) {  // 공고정보확인 
