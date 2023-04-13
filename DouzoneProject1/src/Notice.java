@@ -22,6 +22,7 @@ public class Notice implements Serializable {
 		super();
 		this.noticeNumber++;
 		this.recruitmentNumber = recruitmentNumber;
+		this.presidentID=presidentID;
 		this.gender = gender;
 		this.companyName = companyName;
 		this.companyLocation = companyLocation;
