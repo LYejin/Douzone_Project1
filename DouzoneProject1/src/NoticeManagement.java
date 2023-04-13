@@ -209,7 +209,7 @@ public class NoticeManagement {
 	// 공고 지원
 	public void noticeApplication(String applicantId) {
 		System.out.print("지원할 공고 번호를 입력해주세요 : ");
-		int number = Integer.parseInt(sc.nextLine());
+		String number = sc.nextLine();
 		this.noticeList = noticeFileLoad();
 		Notice notice = noticeList.get(number);
 		notice.setApplicant(applicantId);
@@ -239,9 +239,13 @@ public class NoticeManagement {
 	public void applicantNoticeListCheck(String applicantId) {
 		System.out.println("지원한 공고의 목록을 확인합니다.");
 		this.noticeList = noticeFileLoad();
-//		for () { // 공고 번호 size 까지 돌아간다.
-//			System.out.println(noticeList.get(applicantId));
-//		}
+		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
+			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) { // 공고마다 지원자 수만큼
+				if((noticeEntry.getValue().getApplicant().get(i).equals(applicantId))) {
+					System.out.println(noticeEntry.getValue().getNoticeNumber() + " ");
+				}
+			}
+		}
 		System.out.println();
 	}
 }
