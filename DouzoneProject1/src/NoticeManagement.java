@@ -83,6 +83,10 @@ public class NoticeManagement {
 	// 공고 삭제
 	public void noticeDeletion(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
+		if(noticeList.get(noticeNumber)==null) {
+			System.out.println("해당 공고가 존재하지 않습니다.");
+			return;
+		}
 		noticeList.remove(noticeNumber);
 		noticeFileSave(noticeList);
 		System.out.println("공고를 삭제했습니다.");
