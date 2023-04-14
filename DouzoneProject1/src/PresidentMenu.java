@@ -55,7 +55,7 @@ public class PresidentMenu {
 	// 공고번호 입력 받는 메소드
 	private String inputNoticeNumber() {
 		System.out.println("공고번호를 입력해주세요.");
-		System.out.println("공고번호 : ");
+		System.out.print("공고번호 : ");
 		String noticeNumber = sc.nextLine();
 		return noticeNumber;
 	}
