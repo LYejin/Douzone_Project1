@@ -74,6 +74,10 @@ public class NoticeManagement {
 	// 공고 상태 변경
 	public void noticeStatusChange(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
+		if(noticeList.get(noticeNumber)==null) {
+			System.out.println("해당 공고가 존재하지 않습니다.");
+			return;
+		}
 		Notice notice = noticeList.get(noticeNumber);
 		notice.setNoticeStatus();
 		noticeFileSave(noticeList);
@@ -82,6 +86,10 @@ public class NoticeManagement {
 	// 공고 삭제
 	public void noticeDeletion(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
+		if(noticeList.get(noticeNumber)==null) {
+			System.out.println("해당 공고가 존재하지 않습니다.");
+			return;
+		}
 		noticeList.remove(noticeNumber);
 		noticeFileSave(noticeList);
 		System.out.println("공고를 삭제했습니다.");
@@ -248,6 +256,8 @@ public class NoticeManagement {
 			System.out.print("지원할 공고 번호를 입력해주세요 : ");
 			String number = sc.nextLine();
 			this.noticeList = noticeFileLoad();
+			System.out.println("inEntry : " + inEntry(applicantId));
+			System.out.println("inRecru : " + isRecruitment(number));
 			if(inEntry(applicantId) && isRecruitment(number)) {
 				Notice notice = noticeList.get(number);
 				notice.setApplicant(applicantId);
@@ -311,8 +321,6 @@ public class NoticeManagement {
 		this.noticeList = noticeFileLoad();
 		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
 			if(noticeEntry.getValue().getApplicant()==null) {
-				System.out.println("현재 지원하신 공고가 하나도 없습니다.");
-				System.out.println("공고에 지원하세요");
 				continue;
 			}
 			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) { // 공고마다 지원자 수만큼
