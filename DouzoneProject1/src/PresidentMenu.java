@@ -69,6 +69,7 @@ public class PresidentMenu {
 			System.out.println("----------------------------------");
 			System.out.println("원하시는 항목을 선택해주세요.");
 			System.out.println("[1]지원자조회 [2]공고목록확인 [3]공고삭제 [4]공고수정 [5]공고등록 [6]공고상태변경 [7]개인정보수정 [8]로그아웃");
+			System.out.print("항목 입력: ");
 			try {
 				temp = Integer.parseInt(sc.nextLine());
 				switch (temp) {
