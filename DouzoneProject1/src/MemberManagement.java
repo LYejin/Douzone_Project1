@@ -57,8 +57,7 @@ public class MemberManagement {
 				String memberPW = sc.nextLine();
 				boolean check;
 				if (memberPW.equals("메뉴")) {
-					showMenu();
-					break;
+					return;
 				} else {
 					check = Pattern.matches("^[a-zA-Z0-9]{7,12}([a-zA-Z]+)", memberPW);
 				}
@@ -70,13 +69,13 @@ public class MemberManagement {
 				System.out.printf("사용자 이름 : ");
 				String userName = sc.nextLine();
 				if (userName.equals("메뉴")) {
-					showMenu();
-					break;
+					return;
 				} else {
 					check = Pattern.matches("^[가-힣]{2,6}$", userName);
 				}
 				president.setuserName(userName);
 				break;
+			default:
 			}
 			presidentFileSave();
 			System.out.println();
@@ -126,8 +125,7 @@ public class MemberManagement {
 				String memberPW = sc.nextLine();
 				boolean check;
 				if (memberPW.equals("메뉴")) {
-					showMenu();
-					break;
+					return;
 				} else {
 					check = Pattern.matches("^[a-zA-Z0-9]{7,12}([a-zA-Z]+)", memberPW);
 				}
@@ -139,8 +137,7 @@ public class MemberManagement {
 				System.out.printf("사용자 이름 : ");
 				String userName = sc.nextLine();
 				if (userName.equals("메뉴")) {
-					showMenu();
-					break;
+					return;
 				} else {
 					check = Pattern.matches("^[가-힣]{2,6}$", userName);
 				}
