@@ -255,8 +255,6 @@ public class NoticeManagement {
 			System.out.print("지원할 공고 번호를 입력해주세요 : ");
 			String number = sc.nextLine();
 			this.noticeList = noticeFileLoad();
-			System.out.println("inEntry : " + inEntry(applicantId, number));
-			System.out.println("inRecru : " + isRecruitment(number));
 			if(inEntry(applicantId, number) && isRecruitment(number)) {
 				Notice notice = noticeList.get(number);
 				notice.setApplicant(applicantId);
@@ -304,6 +302,10 @@ public class NoticeManagement {
 	
 	// [지원자] 각 공고 정보 확인 (하나씩)
 	public void noticeInfoCheck(String noticeNumber) {
+		if(noticeList.get(noticeNumber)==null) {
+			System.out.println("해당 공고가 존재하지 않습니다.");
+			return;
+		}
 		System.out.println("해당 공고의 정보를 확인합니다.");
 		this.noticeList = noticeFileLoad();
 		System.out.println(noticeList.get(noticeNumber));

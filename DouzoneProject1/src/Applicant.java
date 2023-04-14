@@ -39,6 +39,7 @@ public class Applicant implements Serializable {
 		this.memberID = memberID;
 		this.memberPW = memberPW;
 		this.userName = userName;
+		this.loginStatus = false;
 	}
 	
 }
