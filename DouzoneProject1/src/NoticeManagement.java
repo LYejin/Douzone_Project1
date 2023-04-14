@@ -4,7 +4,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -257,7 +256,9 @@ public class NoticeManagement {
 			System.out.print("지원할 공고 번호를 입력해주세요 : ");
 			String number = sc.nextLine();
 			this.noticeList = noticeFileLoad();
-			if(inEntry(applicantId) && isRecruitment(number)) {
+			System.out.println("inEntry : " + inEntry(applicantId, number));
+			System.out.println("inRecru : " + isRecruitment(number));
+			if(inEntry(applicantId, number) && isRecruitment(number)) {
 				Notice notice = noticeList.get(number);
 				notice.setApplicant(applicantId);
 				noticeFileSave(noticeList);
@@ -281,14 +282,14 @@ public class NoticeManagement {
 	}
 	
 	// 해당 공고 안에 이미 지원자가 있는가??
-	public boolean inEntry(String applicantId) {
-		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
-			if(noticeEntry.getValue().getApplicant()==null) continue;
-			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) {
-				if(noticeEntry.getValue().getApplicant().get(i).equals(applicantId)) {
-					return false;
-				}
-			}		
+	public boolean inEntry(String applicantId, String number) {
+		Notice notice = noticeList.get(number);
+		if(notice.getApplicant()==null) { return true;}
+		for(int i=0; i<notice.getApplicant().size(); i++) {
+			System.out.println("list"+i+" : " + notice.getApplicant().get(i));
+			if(notice.getApplicant().get(i).equals(applicantId)) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -318,8 +319,6 @@ public class NoticeManagement {
 		this.noticeList = noticeFileLoad();
 		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
 			if(noticeEntry.getValue().getApplicant()==null) {
-				System.out.println("현재 지원하신 공고가 하나도 없습니다.");
-				System.out.println("공고에 지원하세요");
 				continue;
 			}
 			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) { // 공고마다 지원자 수만큼
