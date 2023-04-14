@@ -230,21 +230,20 @@ public class NoticeManagement {
 	// [사장] 등록한 공고 목록 확인
 	public void noticeListCheck(String presidentID) {
 		try {
-			
-		} catch (Exception e) {
-			System.out.println();
-		}
-		System.out.println("등록한 공고를 확인합니다.");
-		this.noticeList = noticeFileLoad();
-		if (noticeList.size() == 0) {
-			System.out.println("등록된 공고가 없습니다.");
-		} else {
-			System.out.println("등록한 공고 정보 : ");
-			for (Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
-				if (noticeEntry.getValue().getPresidentID().equals(presidentID)) {
-					System.out.println(noticeEntry.getValue());
+			System.out.println("등록한 공고를 확인합니다.");
+			this.noticeList = noticeFileLoad();
+			if (noticeList.size() == 0) {
+				System.out.println("등록된 공고가 없습니다.");
+			} else {
+				System.out.println("등록한 공고 정보 : ");
+				for (Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
+					if (noticeEntry.getValue().getPresidentID().equals(presidentID)) {
+						System.out.println(noticeEntry.getValue());
+					}
 				}
 			}
+		} catch (Exception e) {
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -271,7 +270,6 @@ public class NoticeManagement {
 			System.out.println("공고번호입력에러: 공고번호 입력이 잘못되었습니다.");
 			//e.printStackTrace();
 		}
-		
 	}
 	
 	// 해당 공고가 모집 중인가??
