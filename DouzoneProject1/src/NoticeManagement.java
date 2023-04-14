@@ -75,6 +75,10 @@ public class NoticeManagement {
 	// 공고 상태 변경
 	public void noticeStatusChange(String noticeNumber) {
 		this.noticeList = noticeFileLoad();
+		if(noticeList.get(noticeNumber)==null) {
+			System.out.println("해당 공고가 존재하지 않습니다.");
+			return;
+		}
 		Notice notice = noticeList.get(noticeNumber);
 		notice.setNoticeStatus();
 		noticeFileSave(noticeList);
