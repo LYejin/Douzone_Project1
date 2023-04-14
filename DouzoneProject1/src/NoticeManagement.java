@@ -220,7 +220,9 @@ public class NoticeManagement {
 		System.out.print("지원할 공고 번호를 입력해주세요 : ");
 		String number = sc.nextLine();
 		this.noticeList = noticeFileLoad();
-		if(inEntry(applicantId) && isRecruitment(number)) {
+		System.out.println("inEntry : " + inEntry(applicantId));
+		System.out.println("isrecru : " + isRecruitment(number));
+		if(inEntry(applicantId) && isRecruitment(number)) {			
 			Notice notice = noticeList.get(number);
 			notice.setApplicant(applicantId);
 			noticeFileSave(noticeList);
@@ -243,10 +245,12 @@ public class NoticeManagement {
 		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
 			if(noticeEntry.getValue().getApplicant()==null) continue;
 			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) {
+				System.out.println("applicantId : " + applicantId);
+				System.out.println("aa"+i+" : " + noticeEntry.getValue().getApplicant().get(i));
 				if(noticeEntry.getValue().getApplicant().get(i).equals(applicantId)) {
 					return false;
 				}
-			}		
+			}
 		}
 		return true;
 	}
