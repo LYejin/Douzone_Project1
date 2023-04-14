@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 //2. 로그인 이후 화면	
 
 public class MemberManagement {
-
 	private HashMap<String, President> presentsList = new HashMap<>();
 	private HashMap<String, Applicant> applicantsList = new HashMap<>();
 	private boolean indentifyingApplicants; // 사장 지원자 확인 - 아직까지 사용되고 있지 않음
@@ -23,18 +22,16 @@ public class MemberManagement {
 
 	// 기존 사장 회원의 목록을 그대로 유지하기 위한 메소드
 	public HashMap<String, President> presentsSetting() {
-
 		File presidentFile = new File("PresidentData.txt");
 		if (presidentFile.length() > 0) {
 			try {
 				FileInputStream fis = new FileInputStream(presidentFile);
-				ObjectInputStream oos = new ObjectInputStream(fis);
+				ObjectInputStream ois = new ObjectInputStream(fis);
 
-				presentsList = (HashMap) oos.readObject();
+				presentsList = (HashMap) ois.readObject();
 
-				oos.close();
+				ois.close();
 				fis.close();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("유저정보를 불러오는데 실패했습니다.");
@@ -72,7 +69,6 @@ public class MemberManagement {
 				System.out.println("메뉴로 이동을 원하시면 '메뉴'를 입력해주세요");
 				System.out.printf("사용자 이름 : ");
 				String userName = sc.nextLine();
-
 				if (userName.equals("메뉴")) {
 					showMenu();
 					break;
@@ -87,6 +83,7 @@ public class MemberManagement {
 		}
 	}
 	
+	// 사장 파일 저장
 	public void presidentFileSave() {
 		String presidentFile = "PresidentData.txt";
 		FileOutputStream fos = null;
@@ -99,7 +96,6 @@ public class MemberManagement {
 			out = new ObjectOutputStream(bos);
 
 			out.writeObject(presentsList);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -107,14 +103,57 @@ public class MemberManagement {
 				out.close();
 				bos.close();
 				fos.close();
-
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 		}
 	}
 	
-	public void applicatnFileSave() {
+	// 지원자 개인정보 변경
+	public void applicantInfomationModifocation(String applicantId) {
+		HashMap<String, Applicant> applicantsList = applicantsSetting();
+		Applicant applicant = applicantsList.get(applicantId);
+		int num = -1;
+		while (num != 0) {
+			System.out.println("개인정보를 수정할 항목을 선택해주세요");
+			System.out.println("1:비밀번호 2:이름");
+			num = Integer.parseInt(sc.nextLine());
+			switch (num) {
+			case 1:
+				System.out.println("비밀번호는 영문자를 포함한 숫자의 조합으로 8~12자리로 입력해주세요");
+				System.out.println("메뉴로 이동을 원하시면 '메뉴'를 입력해주세요");
+				System.out.printf("비밀번호 : ");
+				String memberPW = sc.nextLine();
+				boolean check;
+				if (memberPW.equals("메뉴")) {
+					showMenu();
+					break;
+				} else {
+					check = Pattern.matches("^[a-zA-Z0-9]{7,12}([a-zA-Z]+)", memberPW);
+				}
+				applicant.setmemberPW(memberPW);
+				break;
+			case 2:
+				System.out.println("사용자의 이름을 정확히 입력해주세요");
+				System.out.println("메뉴로 이동을 원하시면 '메뉴'를 입력해주세요");
+				System.out.printf("사용자 이름 : ");
+				String userName = sc.nextLine();
+				if (userName.equals("메뉴")) {
+					showMenu();
+					break;
+				} else {
+					check = Pattern.matches("^[가-힣]{2,6}$", userName);
+				}
+				applicant.setuserName(userName);
+				break;
+			}
+			applicantFileSave();
+			System.out.println();
+		}
+	}
+	
+	// 지원자 파일 저장
+	public void applicantFileSave() {
 		String applicantFile = "ApplicantData.txt";
 		FileOutputStream fos = null;
 		BufferedOutputStream bos = null;
@@ -126,7 +165,6 @@ public class MemberManagement {
 			out = new ObjectOutputStream(bos);
 
 			out.writeObject(applicantsList);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -140,8 +178,8 @@ public class MemberManagement {
 		}
 	}
 	
-	public HashMap<String, Applicant> applicantsSetting() {
-
+	// 지원자 파일 불러오기
+	public HashMap<String,Applicant> applicantsSetting() {
 		File applicantFile = new File("ApplicantData.txt");// null 일 때 예외발생
 		if (applicantFile.length() > 0) {
 			try {
@@ -152,9 +190,7 @@ public class MemberManagement {
 
 				oos.close();
 				fis.close();
-
 			} catch (Exception e) {
-
 				e.printStackTrace();
 				System.out.println("유저정보를 불러오는데 실패했습니다.");
 			}
@@ -166,7 +202,6 @@ public class MemberManagement {
 
 	// 회원가입과 로그인을 선택하는 메뉴화면 출력
 	public void showMenu() {
-
 		presentsSetting(); // 사장 목록 불러오기
 		applicantsSetting();// 지원자 목록 불러오기
 
@@ -177,7 +212,7 @@ public class MemberManagement {
 			System.out.println("* 1. 로그인    2. 회원가입      0.종료");
 			System.out.println("**********************************");
 			System.out.printf("번호를 입력해주세요 : ");
-
+			
 			try {
 				Scanner sc = new Scanner(System.in);
 
@@ -205,13 +240,6 @@ public class MemberManagement {
 
 	// 회원가입
 	public void signUp() {
-
-		FileOutputStream fos = null;
-		BufferedOutputStream bos = null;
-		ObjectOutputStream out = null;
-
-		Scanner sc = new Scanner(System.in);
-
 		boolean check;
 		String memberID;
 		String memberPW;
@@ -255,7 +283,6 @@ public class MemberManagement {
 			System.out.println("메뉴로 이동을 원하시면 '메뉴'를 입력해주세요");
 			System.out.printf("사용자 이름 : ");
 			userName = sc.nextLine();
-
 			if (userName.equals("메뉴")) {
 				showMenu();
 				break;
@@ -271,26 +298,18 @@ public class MemberManagement {
 		int selectNum = Integer.parseInt(sc.nextLine());
 
 		switch (selectNum) {
-
 		case 1:
 			this.presentsList.put(memberID, new President(memberID, memberPW, userName));
 			presidentFileSave();
-
 			System.out.println("축하합니다 회원가입이 완료되었습니다.");
 			showMenu();
-
 			break;
-
 		case 2:
-
 			applicantsList.put(memberID, new Applicant(memberID, memberPW, userName));
-			applicatnFileSave();
-
+			applicantFileSave();
 			System.out.println("축하합니다 회원가입이 완료되었습니다.");
 			showMenu();
-
 			break;
-
 		case 0:
 			showMenu();
 			break;
@@ -298,9 +317,6 @@ public class MemberManagement {
 	}
 
 	public void Login() {
-
-		Scanner sc = new Scanner(System.in);
-
 		System.out.print("아이디 입력 :");
 		String inputId = sc.nextLine();
 		System.out.print("비밀번호 입력 : ");
@@ -312,14 +328,11 @@ public class MemberManagement {
 				System.out.println("비밀번호가 일치하지 않습니다.");
 			} else {
 				System.out.println("로그인");
-
 				President p = new President(inputId, inputPwd, presentsList.get(inputId).getuserName());
 				p.setLoginStatus(true);
 				indentifyingApplicants = false;
-
 				PresidentMenu presidentmenu = new PresidentMenu(inputId);
 				presidentmenu.presidentMenu();
-
 			}
 		} // 지원자 로그인
 		else if (applicantsList.containsKey(inputId)) {
@@ -327,21 +340,14 @@ public class MemberManagement {
 				System.out.println("비밀번호가 일치하지 않습니다.");
 			} else {
 				System.out.println("로그인");
-
 				indentifyingApplicants = true;
-
-				President p = new President(inputId, inputPwd, presentsList.get(inputId).getuserName());
-				p.setLoginStatus(true);
+				President p = new President(inputId, inputPwd, applicantsList.get(inputId).getuserName());
+				p.setLoginStatus(true);				
+				ApplicantMenu applicantmenu = new ApplicantMenu(inputId);
+				applicantmenu.applicantMenu();
 			}
 		} else {
 			System.out.println("존재하지 않는 아이디 입니다.");
 		}
-
 	}
-
-	public static void main(String[] args) {
-		MemberManagement memberMgnt = new MemberManagement();
-		memberMgnt.showMenu();
-	}
-
 }

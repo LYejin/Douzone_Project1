@@ -1,7 +1,7 @@
 
 public class Career {
-	public String careerName;
-	public int period;
+	private String careerName;
+	private int period;
 	
 	public Career(String careerName, int period) {
         this.careerName = careerName;

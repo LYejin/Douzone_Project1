@@ -7,8 +7,7 @@ public class Applicant implements Serializable {
 	private String memberPW;
 	private String userName;
 	private boolean loginStatus;
-	public List<Career> clist = new ArrayList<>(); 
-	private List<Integer> 
+	public List<Career> clist = new ArrayList<>();
 	
 	public String getmemberID() {
 		return memberID;
@@ -34,9 +33,6 @@ public class Applicant implements Serializable {
 	public void setLoginStatus(boolean loginStatus) {
 		this.loginStatus = loginStatus;
 	}
-	
-	
-	
 	
 	public Applicant(String memberID, String memberPW, String userName) {
 		super();
