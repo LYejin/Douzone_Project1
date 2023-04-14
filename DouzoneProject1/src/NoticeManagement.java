@@ -256,9 +256,9 @@ public class NoticeManagement {
 			System.out.print("지원할 공고 번호를 입력해주세요 : ");
 			String number = sc.nextLine();
 			this.noticeList = noticeFileLoad();
-			System.out.println("inEntry : " + inEntry(applicantId));
+			System.out.println("inEntry : " + inEntry(applicantId, number));
 			System.out.println("inRecru : " + isRecruitment(number));
-			if(inEntry(applicantId) && isRecruitment(number)) {
+			if(inEntry(applicantId, number) && isRecruitment(number)) {
 				Notice notice = noticeList.get(number);
 				notice.setApplicant(applicantId);
 				noticeFileSave(noticeList);
@@ -282,15 +282,13 @@ public class NoticeManagement {
 	}
 	
 	// 해당 공고 안에 이미 지원자가 있는가??
-	public boolean inEntry(String applicantId) {
-		for(Map.Entry<String, Notice> noticeEntry : noticeList.entrySet()) {
-			if(noticeEntry.getValue().getApplicant()==null) continue;
-			for(int i=0; i<noticeEntry.getValue().getApplicant().size(); i++) {
-				System.out.println("applicantId : " + applicantId);
-				System.out.println("aa"+i+" : " + noticeEntry.getValue().getApplicant().get(i));
-				if(noticeEntry.getValue().getApplicant().get(i).equals(applicantId)) {
-					return false;
-				}
+	public boolean inEntry(String applicantId, String number) {
+		Notice notice = noticeList.get(number);
+		if(notice.getApplicant()==null) { return true;}
+		for(int i=0; i<notice.getApplicant().size(); i++) {
+			System.out.println("list"+i+" : " + notice.getApplicant().get(i));
+			if(notice.getApplicant().get(i).equals(applicantId)) {
+				return false;
 			}
 		}
 		return true;
