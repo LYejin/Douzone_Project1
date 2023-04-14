@@ -140,7 +140,7 @@ public class MemberManagement {
 		}
 	}
 	
-	public void applicantsSetting() {
+	public HashMap<String, Applicant> applicantsSetting() {
 
 		File applicantFile = new File("ApplicantData.txt");// null 일 때 예외발생
 		if (applicantFile.length() > 0) {
@@ -158,6 +158,9 @@ public class MemberManagement {
 				e.printStackTrace();
 				System.out.println("유저정보를 불러오는데 실패했습니다.");
 			}
+			return applicantsList;
+		} else {
+			return null;
 		}
 	}
 

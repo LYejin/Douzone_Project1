@@ -239,9 +239,12 @@ public class NoticeManagement {
 	public void applicantNoticeListCheck(String applicantId) {
 		System.out.println("지원한 공고의 목록을 확인합니다.");
 		this.noticeList = noticeFileLoad();
-//		for () { // 공고 번호 size 까지 돌아간다.
-//			System.out.println(noticeList.get(applicantId));
-//		}
+		MemberManagement memberManagement = new MemberManagement();
+		HashMap<String, Applicant> applicantsList = memberManagement.applicantsSetting();
+		Applicant applicant = applicantsList.get(applicantId);
+		for (applicant.get()) { // 공고 번호 size 까지 돌아간다.
+			System.out.println(noticeList.get(applicantId));
+		}
 		System.out.println();
 	}
 }

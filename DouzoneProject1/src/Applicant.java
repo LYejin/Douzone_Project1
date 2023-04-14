@@ -8,6 +8,7 @@ public class Applicant implements Serializable {
 	private String userName;
 	private boolean loginStatus;
 	public List<Career> clist = new ArrayList<>(); 
+	private List<Integer> 
 	
 	public String getmemberID() {
 		return memberID;
