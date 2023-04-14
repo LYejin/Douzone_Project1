@@ -194,8 +194,10 @@ public class MemberManagement {
 				e.printStackTrace();
 				System.out.println("유저정보를 불러오는데 실패했습니다.");
 			}
+			return applicantsList;
+		} else {
+			return null;
 		}
-		return applicantsList;
 	}
 
 	// 회원가입과 로그인을 선택하는 메뉴화면 출력
