@@ -21,6 +21,7 @@ public class ApplicantMenu {
 			System.out.println("----------------------------------");
 			System.out.println("원하시는 항목을 선택해주세요.");
 			System.out.println("[1]공고지원 [2]공고정보확인 [3]전체공고목록확인 [4]지원공고목록확인 [5]개인정보수정 [6]로그아웃");
+			System.out.print("항목 입력: ");
 			try {
 				temp = Integer.parseInt(sc.nextLine());
 				switch (temp) {
